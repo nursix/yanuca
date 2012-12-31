@@ -1,0 +1,370 @@
+/* This stylesheet is part of the YaNuCa
+   nutrition calculation program for intensive care.
+
+   YaNuCa (Yet Another NUtrition CAlculator) Version 1.2
+
+   (c) 2003-2009 Dominic König (nursix.org)
+
+   The YaNuCa program, including this stylesheet, is free software;
+   you can redistribute it and/or modify it under the terms of the GNU
+   Affero General Public License as published by the Free Software Foundation;
+   either version 3 of the License, or (at your option) any later version.
+
+   The YaNuCa program is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+   or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License
+   for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this document; if not, see <http://www.gnu.org/licenses/>.
+
+   If you want to find out more about YaNuCa, please visit <http://www.nursix.org>
+
+*/
+
+/* ----------------------------------- Whole Document -------------------- */
+
+body {
+    background-color:       #000000;
+    font-family:            Verdana, Arial, sans-serif;
+}
+
+#Page {
+    width:                  640px;
+    border:                 solid 15px #ffffff;
+    background-color:       #ffffff;
+}
+
+#NoJavaScript {
+
+}
+
+/* ----------------------------------- Title Area ------------------------ */
+
+#Header .titlearea {
+    width:                  100%;
+    background-image:       url(yanuca.png);
+    background-position:    right;
+    background-repeat:      no-repeat;
+}
+
+#Header .titlearea td {
+    padding:                4px;
+    margin:                 0;
+    border:                 0;
+}
+
+#DocTitle {
+    text-align:             left;
+}
+
+#DocTitle h2 {
+    font-size:              90%;
+    padding:                0;
+    margin:                 0;
+    border:                 0;
+}
+
+#L10nLink a img {
+    border:                 0;
+    padding-top:            6px;
+}
+
+#L10nLink a.howto {
+    font-size:              66%;
+}
+
+#TitleImg {
+    width:                  200px;
+    height:                 50px;
+}
+
+/* ----------------------------------- The Form Area --------------------- */
+
+#Main {
+    width:                  100%;
+}
+
+#Nutriform {
+    width:                  100%;
+    margin:                 0;
+    padding:                0;
+    border:                 0;
+}
+
+.formarea {
+    width:                  100%;
+    border-collapse:        collapse;
+    margin:                 0;
+    border:                 0;
+    padding:                0;
+    text-align:             left;
+}
+
+.nfheader {
+}
+
+.resultfield {
+    color:                  #000000;
+    background-color:       #ffffff;
+}
+
+/* ----------------------------------- PatientData Section --------------- */
+
+#PatientData {
+    width:                  100%;
+    border:                 solid 1px #000000;
+    margin-top:             10px;
+}
+
+#PatientData table.formarea  tbody {
+    background-color:       #f0f0f0;
+    font-size:              75%;
+}
+
+#PatDatHead {
+    font-size:              80%;
+    font-weight:            bold;
+    border-bottom:          solid 1px #000000;
+    padding:                3px;
+    padding-left:           6px;
+    padding-top:            8px;
+    background-image:       url(datbg1.png);
+    background-position:    left;
+    background-repeat:      repeat-x;
+}
+
+#PatientData td.leftheader {
+    padding-left:           6px;
+    width:                  12em;
+}
+
+#PatDatAgeShape td {
+    padding-top:            6px;
+}
+
+#PatDatBottom {
+    height:                 10px;
+    font-size:              30%;
+    background-image:       url(datbg2.png);
+    background-position:    left;
+    background-repeat:      repeat-x;
+}
+
+/* ----------------------------------- NutritionSettings Section --------- */
+
+#NutritionSettings {
+    width:                  100%;
+    border:                 solid 1px #000000;
+    margin-top:             10px;
+}
+
+#NutritionSettings table.formarea {
+    background-color:       #ff9294;
+}
+
+#NutritionSettings td {
+    font-size:              75%;
+}
+
+#NutritionSettings td.leftheader {
+    padding-left:           6px;
+}
+
+#OralSettings td {
+    padding-top:            6px;
+}
+
+#NutSetHead {
+    font-size:              80%;
+    font-weight:            bold;
+    border-bottom:          solid 1px #000000;
+    padding-left:           6px;
+    padding-top:            8px;
+    background-image:       url(skbg1.png);
+    background-position:    left;
+    background-repeat:      repeat-x;
+}
+
+#NutSetBottom {
+    height:                 10px;
+    background-image:       url(skbg2.png);
+    background-position:    left;
+    background-repeat:      repeat-x;
+    font-size:              20%;
+    padding-bottom:         8px;
+}
+
+/* ----------------------------------- RequirementsTable Section --------- */
+
+#RequirementsTable {
+    width:                  100%;
+    border:                 solid 1px #000000;
+    margin:                 0;
+    margin-top:             10px;
+}
+
+#RequirementsTable table.formarea  {
+    background-color:       #ffd485;
+}
+
+#RequirementsTable td {
+    font-size:              75%;
+}
+
+#RequirementsTable td.leftheader {
+    padding-left:           6px;
+}
+
+#ReqTabHead {
+    font-size:              80%;
+    font-weight:            bold;
+    border-bottom:          solid 1px #000000;
+    padding-left:           6px;
+    padding-top:            8px;
+}
+
+#PatientWeight td {
+    padding-top:            6px;
+}
+
+#Requirements td {
+    padding-bottom:         6px;
+}
+
+#SupplyHead,
+#ProteinSupply,
+#GlucoseSupply,
+#LipidSupply,
+#EnergySupply {
+    background-color:       #fff4a5;
+}
+
+#SupplyHead td {
+    border-top:             solid 1px #000000;
+    background-image:       url(calcbg1.png);
+    background-position:    left;
+    background-repeat:      repeat-x;
+    padding-top:            8px;
+    padding-bottom:         6px;
+    font-weight:            bold;
+}
+
+#SupplyHead td {
+    padding-top:            6px;
+    font-weight:            bold;
+}
+
+#ReqTabBottom {
+    height:                 10px;
+    background-image:       url(calcbg2.png);
+    background-position:    left;
+    background-repeat:      repeat-x;
+    font-size:              30%;
+    padding-bottom:         8px;
+}
+
+/* ----------------------------------- RatesTable Section ---------------- */
+
+#RatesTable {
+    width:                  100%;
+    border:                 solid 1px #000000;
+    margin:                 0;
+    margin-top:             10px;
+}
+
+#RatesTable table.formarea {
+    background-color:       #f0f0f0;
+}
+
+#RatesTable td {
+    font-size:              75%;
+}
+
+#RatesTable td.leftheader {
+    padding-left:           6px;
+}
+
+#RatTabHead {
+    font-size:              80%;
+    font-weight:            bold;
+    border-bottom:          solid 1px #000000;
+    padding:                3px;
+    padding-left:           6px;
+    padding-top:            8px;
+    background-image:       url(datbg1.png);
+    background-position:    left;
+    background-repeat:      repeat-x;
+}
+
+#Levels {
+    font-weight:            bold;
+    padding-top:            6px;
+}
+
+#Levels td {
+    padding-top:            8px;
+    padding-bottom:         2px;
+}
+
+#EnteralRates,
+#WaterQuota {
+    background-color:       #7fafff;
+}
+
+#Portions {
+    background-color:       #cfefff;
+}
+
+#RatesA10 td {
+    padding-top:             15px;
+}
+
+#RatTabBottom {
+    height:                 10px;
+    font-size:              30%;
+    background-image:       url(datbg2.png);
+    background-position:    left;
+    background-repeat:      repeat-x;
+}
+
+/* ----------------------------------- Document Info Section ------------- */
+
+#Footer {
+    width:                  100%;
+    padding:                0;
+    border:                 solid 1px #000000;
+    text-align:             left;
+    margin-top:             8px;
+}
+
+#DocInfo {
+    width:                  100%;
+}
+
+#DocInfo img {
+    padding:                4px;
+    text-align:             center;
+}
+
+#Copyright {
+    font-size:              66%;
+    padding:                4px;
+    margin:                 0;
+    border:                 0;
+}
+#License {
+    font-size:              60%;
+    padding:                4px;
+    margin:                 0;
+    border:                 0;
+}
+
+/* ----------------------------------- Print Media Settings -------------- */
+
+@media print {
+    #L10nLink a,
+    #L10nLink img {
+        display:              none;
+    }
+}

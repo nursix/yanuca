@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE
+ html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<!--
+
+    This document is part of the YaNuCa ICU nutrition calculation program.
+
+    YaNuCa (Yet Another NUtrition CAlculator) Version 1.2
+
+    (c) 2003-2009 Dominic König (nursix.org)
+
+    The YaNuCa program is free software - you can redistribute and/or modify it
+    under the terms of the GNU Affero General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or (at your
+    option) any later version.
+
+    The YaNuCa program is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+    or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero Public License
+    for more details.
+
+    You should have received a copy of the GNU Affero Public License
+    along with this document; if not, see <http://www.gnu.org/licenses/>.
+
+    If you want to find out more about the YaNuCa project, please visit
+    my website at <http://www.nursix.org/>.
+
+-->
+
+    <head>
+
+        <title>YaNuCa ICU Nutrition Calculator</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <!-- Stylesheets -->
+        <link href="../style/style.css"           type="text/css" rel="stylesheet"/>
+        <link href="../jquery/jquery.cluetip.css" type="text/css" rel="stylesheet" />
+
+        <!-- jQuery and Plugins -->
+        <script src="../jquery/jquery.js"             type="text/javascript"></script>
+        <script src="../jquery/jquery.dimensions.js"  type="text/javascript"></script>
+        <script src="../jquery/jquery.hoverIntent.js" type="text/javascript"></script>
+        <script src="../jquery/jquery.cluetip.js"     type="text/javascript"></script>
+
+        <!-- YaNuCa -->
+        <script src="../yalang.js"             type="text/javascript"></script>
+        <script src="../yanuca/yanuca.data.js" type="text/javascript"></script>
+        <script src="../yanuca/yanuca.js"      type="text/javascript"></script>
+
+        <!-- activate clueTips -->
+        <script type="text/javascript">//<![CDATA[
+            $(document).ready(function() {
+                $('img.tips').cluetip({ splitTitle: '|', showTitle: false });
+            });
+        //]]></script>
+
+    </head>
+
+    <body onload="resizeTo(screen.availWidth-60,screen.availHeight-80); moveTo(30,40); yanuca();">
+        <div align="center">
+            <div id="Page">
+
+                <!-- ************************************************************************ -->
+
+                <a id="Start" name="Start" /> <!-- not really necessary -->
+
+                <!-- ************************** NoJavaScript ******************************** -->
+
+                <noscript>
+                    <div id="NoJavaScript">
+                        <p>
+                        <b>Du kan inte använda programmet!</b><br />
+                        JavaScript stöds inte av din webläsare eller JavaScript har avaktiverats.
+                        </p>
+                    </div> <!-- NoJavaScript end -->
+                </noscript>
+
+                <!-- ************************** Header ************************************** -->
+
+                <div id="Header">
+
+                    <table class="titlearea">
+                        <tbody>
+                            <tr>
+                                <td id="DocTitle">
+                                    <h2>Nutritionsberäkning</h2>
+                                </td>
+                                <td id="L10nLink">
+                                    <a class="howto" target="_blank" href="howto.html">Hjälp</a>
+                                    <br/>
+                                    <a href="../index.html"><img src="../images/en.png" alt="english" /></a>
+                                    <a href="../de/index.html"><img src="../images/de.png" alt="deutsch" /></a>
+                                    <img src="../images/sv.png" alt="svenska" />
+                                </td>
+                                <td id="TitleImg">&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div> <!-- Header end -->
+
+                <!-- ************************** Main **************************************** -->
+
+                <div id="Main">
+
+                    <form id="Nutriform" name="Nutriform" action="./index.html">
+
+                        <!-- ==================== Patient Data ====================== -->
+                        <div id="PatientData">
+
+                            <table class="formarea" summary="Patient Data" cellspacing="0">
+
+                                <thead>
+                                    <tr>
+                                        <td class="nfheader" id="PatDatHead" colspan="4">
+                                        Patientuppgifter
+                                        </td>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr id="PatDatAgeShape">
+                                        <td class="leftheader" align="left">
+                                            Ålder
+                                        </td>
+                                        <td align="left">
+                                            <select name="iAge" size="1" style="width:10em;" onchange="yanuca();">
+                                                <option value="15">&lt;20 år</option>
+                                                <option value="25">20..30 år</option>
+                                                <option value="35">30..40 år</option>
+                                                <option value="45">40..50 år</option>
+                                                <option value="55">50..60 år</option>
+                                                <option value="65" selected="selected">60..70 år</option>
+                                                <option value="75">70..80 år</option>
+                                                <option value="85">80..90 år</option>
+                                                <option value="95">&gt;90 år</option>
+                                            </select>
+                                        </td>
+                                        <td class="rightheader" align="left">
+                                            Statur
+                                        </td>
+                                        <td align="left">
+                                            <select name="iShape" size="1" style="width:10em;" onchange="yanuca();">
+                                                <option value="21" selected="selected">normal</option>
+                                                <option value="28">övervikt</option>
+                                                <option value="35">fetma</option>
+                                                <option value="42">extrem fetma</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr id="PatDatSexWeight">
+                                        <td class="leftheader" align="left">
+                                            Kön
+                                        </td>
+                                        <td align="left">
+                                            <select name="iSex" size="1" style="width:10em;" onchange="yanuca();">
+                                            <option value="0">kvinna</option>
+                                            <option value="1" selected="selected">man</option>
+                                            </select>
+                                        </td>
+                                        <td class="rightheader" align="left">
+                                            Vikt
+                                        </td>
+                                        <td align="left">
+                                            <select name="iWeight" size="1" style="width:10em;" onchange="yanuca();">
+                                            <option value="0" selected="selected">ökänd</option>
+                                            <option value="35">35 kg</option>
+                                            <option value="40">40 kg</option>
+                                            <option value="45">45 kg</option>
+                                            <option value="50">50 kg</option>
+                                            <option value="55">55 kg</option>
+                                            <option value="60">60 kg</option>
+                                            <option value="65">65 kg</option>
+                                            <option value="70">70 kg</option>
+                                            <option value="75">75 kg</option>
+                                            <option value="80">80 kg</option>
+                                            <option value="85">85 kg</option>
+                                            <option value="90">90 kg</option>
+                                            <option value="95">95 kg</option>
+                                            <option value="100">100 kg</option>
+                                            <option value="105">105 kg</option>
+                                            <option value="110">110 kg</option>
+                                            <option value="115">115 kg</option>
+                                            <option value="120">120 kg</option>
+                                            <option value="130">130 kg</option>
+                                            <option value="140">140 kg</option>
+                                            <option value="150">150 kg</option>
+                                            <option value="160">160 kg</option>
+                                            <option value="170">170 kg</option>
+                                            <option value="180">180 kg</option>
+                                            <option value="190">190 kg</option>
+                                            <option value="200">200 kg</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr id="PatDatSize">
+                                        <td class="leftheader" align="left">
+                                            Kroppslängd
+                                        </td>
+                                        <td align="left">
+                                            <select name="iSize" size="1" style="width:10em;" onchange="yanuca();">
+                                                <option value="130">130 cm</option>
+                                                <option value="135">135 cm</option>
+                                                <option value="140">140 cm</option>
+                                                <option value="145">145 cm</option>
+                                                <option value="150">150 cm</option>
+                                                <option value="155">155 cm</option>
+                                                <option value="160">160 cm</option>
+                                                <option value="165">165 cm</option>
+                                                <option value="170" selected="selected">170 cm</option>
+                                                <option value="175">175 cm</option>
+                                                <option value="180">180 cm</option>
+                                                <option value="185">185 cm</option>
+                                                <option value="190">190 cm</option>
+                                                <option value="195">195 cm</option>
+                                                <option value="200">200 cm</option>
+                                            </select>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr id="PatDatIllness">
+                                        <td class="leftheader" align="left">
+                                            Sjukdomsfaktor
+                                        </td>
+                                        <td colspan="3" align="left">
+                                            <select name="iIllness" size="1" style="width:28em;" onchange="yanuca();">
+                                                <option value="CriticalInitial">Kritisk sjukdom, SIRS (initialfas)</option>
+                                                <option value="CriticalHyperCatabolic">Kritisk sjukdom, SIRS (hyperkatabol fas)</option>
+                                                <option value="CriticalAnabolic">Kritisk sjukdom (anabol fas)</option>
+                                                <option value="NonCriticalPassive" selected="selected">Standard, Planerad intensivterapi</option>
+                                                <option value="NonCriticalActive">Standard, Återuppbyggnad/Rehabilitering</option>
+                                                <option value="MinorStress">Oro/Agitation, Multitrauma, Protraherad sepsis</option>
+                                                <option value="MajorStress">Brännskada &gt;40%, Tyngst trauma, Traumatisk hjärnskada</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr id="PatDatFever">
+                                        <td class="leftheader" align="left">
+                                            Feber/Hypotermi
+                                        </td>
+                                        <td colspan="3" align="left">
+                                            <select name="iTFactor" size="1" style="width:28em;" onchange="yanuca();">
+                                                <option value="1.0">normalt</option>
+                                                <option value="1.1">upp till 38°C</option>
+                                                <option value="1.2">upp till 39°C</option>
+                                                <option value="1.3">upp till 40°C</option>
+                                                <option value="1.4">&gt;40°C</option>
+                                                <option value="0.66">Hypotermibehandling</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr id="PatDatBottom">
+                                        <td colspan="4">&nbsp;</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div> <!-- PatientData end -->
+
+                        <!-- ==================== Nutrition Settings ================ -->
+                        <div id="NutritionSettings">
+
+                            <table class="formarea" summary="Nutrition Settings" cellspacing="0">
+
+                                <thead>
+                                    <tr>
+                                        <td class="nfheader" id="NutSetHead" colspan="4">
+                                            Oral/Enteral Nutrition
+                                        </td>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr id="OralSettings">
+                                        <td class="leftheader" align="left">
+                                            Oral Intag
+                                        </td>
+                                        <td align="left">
+                                            <select name="iOralIntake" size="1" style="width:16em;" onchange="yanuca();">
+                                                <option value="0" selected="selected">ingen</option>
+                                                <option value="1">mindre än 300 kcal/d</option>
+                                                <option value="2">300 till 800 kcal/d</option>
+                                                <option value="3">mer än 800 kcal/d</option>
+                                            </select>
+                                        </td>
+                                        <td />
+                                        <td />
+                                    </tr>
+
+                                    <tr id="EnteralSettings">
+                                        <td class="leftheader" align="left">
+                                            Sondmat
+                                        </td>
+                                        <td align="left">
+                                            <select name="iEnteralSolution" size="1" style="width:16em;" onchange="yanuca();">
+
+                                            <!-- Option "Standard": do not delete this line, but comment it as necessary: -->
+                                            <!-- <option value="Standard">Standard</option> -->
+
+                                            <option value="Nutrison">Nutrison Standard</option>
+                                            <option selected="selected" value="NutrisonE">Nutrison Energy</option>
+                                            <option value="NutrisonPP">Nutrison ProteinPlus</option>
+                                            <option value="NutrisonC">Nutrison Complete</option>
+                                            <option value="NutrisonMF">Nutrison MF</option>
+                                            <option value="NutrisonEMF">Nutrison Energy MF</option>
+                                            <option value="NutrisonPPMF">Nutrison ProteinPlus MF</option>
+                                            <option value="Cubison">Cubison</option>
+                                            <option value="Peptisorb">Peptisorb</option>
+                                            <option value="NutrisonConc">Nutrison Concentrated</option>
+                                            <option value="Osmolite">Osmolite</option>
+                                            <option value="OsmoliteBS">Osmolite BS</option>
+                                            <option value="OsmolitePlus">Osmolite Plus</option>
+                                            <option value="OsmoliteHiCal">Osmolite HiCal</option>
+                                            <option value="Pulmocare">Pulmocare Abbott</option>
+                                            <option value="Suplena">Suplena Abbott</option>
+                                            <option value="Oxepa">Oxepa Abbott</option>
+                                            <option value="Jevity">Jevity</option>
+                                            <option value="JevityPlus">Jevity Plus</option>
+                                            <option value="JevityHiCal">Jevity Hical</option>
+                                            <option value="NeproAbbott">Nepro Abbott</option>
+                                            <option value="FresubinO">Fresubin original (1 kcal/ml)</option>
+                                            <option value="FresubinOF">Fresubin original fibre</option>
+                                            <option value="FresubinE">Fresubin energy (1,5 kcal/ml)</option>
+                                            <option value="FresubinEF">Fresubin energy fibre (1,5 kcal/ml)</option>
+                                            <option value="FresubinHPE">Fresubin HP energy (1,5 kcal/ml)</option>
+                                            <option value="SurvimedOPD">Survimed OPD (1 kcal/ml)</option>
+                                            <option selected="selected" value="Diben">Diben (1 kcal/ml)</option>
+                                            <option value="FresubinSojaF">Fresubin soja fibre (1 kcal/ml)</option>
+                                            <option value="Renamil400">Renamil 1 kcal/ml</option>
+                                            <option value="Renamil260">Renamil 1,5 kcal/ml</option>
+                                            <option value="Renamil180">Renamil 2,0 kcal/ml</option>
+                                            <option value="NovaImpact">Novartis Impact</option>
+                                            <option value="NovaImpactG">Novartis Impact Glutamine</option>
+                                            <option value="Isosource">Novartis Isosource Standard</option>
+                                            <option value="IsosourceF">Novartis Isosource Faser</option>
+                                            <option value="IsosourceE">Novartis Isosource Energy</option>
+                                            <option value="IsosourceEF">Novartis Isosource Energy Faser</option>
+                                            <option value="IsosourceP">Novartis Isosource Protein</option>
+                                            </select>
+                                        </td>
+                                        <td class="rightheader" align="left">
+                                            max.
+                                        </td>
+                                        <td align="left">
+                                            <select name="iMaxRate" size="1" style="width:8em;" onchange="yanuca();">
+                                                <option value="30">30 ml/tim</option>
+                                                <option value="40">40 ml/tim</option>
+                                                <option value="50">50 ml/tim</option>
+                                                <option value="60">60 ml/tim</option>
+                                                <option value="70">70 ml/tim</option>
+                                                <option value="80">80 ml/tim</option>
+                                                <option value="90">90 ml/tim</option>
+                                                <option value="100">100 ml/tim</option>
+                                                <option value="110">110 ml/tim</option>
+                                                <option value="120">120 ml/tim</option>
+                                                <option value="130">130 ml/tim</option>
+                                                <option value="140" selected="selected">140 ml/tim</option>
+                                                <option value="150">150 ml/tim</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr id="NutSetBottom">
+                                        <td colspan="4">&nbsp;</td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+
+                        </div> <!-- NutritionSettings end -->
+
+                        <!-- ==================== Requirements Table ================ -->
+                        <div id="RequirementsTable">
+
+                            <table class="formarea" summary="Requirements Table" cellspacing="0">
+
+                                <thead>
+                                    <tr>
+                                        <td class="nfheader" id="ReqTabHead" colspan="4">
+                                            Beräkning
+                                        </td>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr id="PatientWeight">
+                                        <td class="leftheader">Vikt</td>
+                                        <td colspan="4" align="left">
+                                            <input type="text" class="resultfield" name="Weight" value="0" readonly="readonly" size="5" />
+                                            &nbsp;kg
+                                        </td>
+                                    </tr>
+
+                                    <tr id="Requirements">
+                                        <td class="leftheader">Behov</td>
+                                        <td colspan="4" align="left">
+                                            <input type="text" class="resultfield" name="Requirements" value="0" readonly="readonly" size="5" />
+                                            &nbsp;kcal/d
+                                        </td>
+                                    </tr>
+
+                                    <tr id="SupplyHead">
+                                        <td>&nbsp;</td>
+                                        <td>Tillförsel absolut</td>
+                                        <td>Tillförsel relativ</td>
+                                        <td>Mål</td>
+                                    </tr>
+
+                                    <tr id="ProteinSupply">
+                                        <td class="leftheader">Protein</td>
+                                        <td align="left">
+                                            <input type="text" class="resultfield" name="PAbs" value="0" readonly="readonly" size="5" />
+                                            &nbsp;g/d
+                                        </td>
+                                        <td align="left">
+                                            <input type="text" class="resultfield" name="PRel" value="0" readonly="readonly" size="5" />
+                                            &nbsp;g/kg&times;d
+                                        </td>
+                                        <td>
+                                            <select name="iPRange" size="1" style="width:10em;" onchange="yanuca();">
+                                            <option value="0" selected="selected">automatiskt</option>
+                                            <option value="1">0.6-1.0 g/kg</option>
+                                            <option value="2">0.8-1.2 g/kg</option>
+                                            <option value="3">1.0-1.5 g/kg (standard)</option>
+                                            <option value="4">1.2-1.8 g/kg</option>
+                                            <option value="5">1.5-2.1 g/kg</option>
+                                            <option value="6">2.0-2.5 g/kg</option>
+                                            </select>
+                                            <img align="top" class="tips" src="../images/ttip.png" title="|Ställ in målet för daglig proteintillförsel (per kg kroppsvikt)" alt="" />
+                                        </td>
+                                    </tr>
+
+                                    <tr id="GlucoseSupply">
+                                        <td class="leftheader">Kolhydrater</td>
+                                        <td align="left">
+                                            <input type="text" class="resultfield" name="GAbs" value="0" readonly="readonly" size="5" />
+                                            &nbsp;g/d
+                                        </td>
+                                        <td align="left">
+                                            <input type="text" class="resultfield" name="GRel" value="0" readonly="readonly" size="5" />
+                                            &nbsp;g/kg&times;d
+                                        </td>
+                                        <td>
+                                            <select name="iGRange" size="1" style="width:10em;" onchange="yanuca();">
+                                            <option value="0" selected="selected">automatiskt</option>
+                                            <option value="1">1-3 g/kg (mindre)</option>
+                                            <option value="2">1-2 g/kg (minst)</option>
+                                            </select>
+                                            <img align="top" class="tips" src="../images/ttip.png" title="|Ställ in målet för daglig glycostillförsel (per kg kroppsvikt)" alt="" />
+                                        </td>
+                                    </tr>
+
+                                    <tr id="LipidSupply">
+                                        <td class="leftheader">Fett</td>
+                                        <td align="left">
+                                            <input type="text" class="resultfield" name="LAbs" value="0" readonly="readonly" size="5" />
+                                            &nbsp;g/d
+                                        </td>
+                                        <td align="left">
+                                            <input type="text" class="resultfield" name="LRel" value="0" readonly="readonly" size="5" />
+                                            &nbsp;g/kg&times;d
+                                        </td>
+                                        <td>
+                                            <select name="iGIndex" size="1" style="width:10em;" onchange="yanuca();">
+                                            <option value="0" selected="selected">automatiskt</option>
+                                            <option value="1.00">minimum fett</option>
+                                            <option value="0.90">10% NPE</option>
+                                            <option value="0.80">20% NPE</option>
+                                            <option value="0.70">30% NPE</option>
+                                            <option value="0.60">40% NPE</option>
+                                            <option value="0.50">50% NPE</option>
+                                            <option value="0.40">60% NPE</option>
+                                            <option value="0.30">70% NPE</option>
+                                            </select>
+                                            <img align="top" class="tips" src="../images/ttip.png" title="|Ställ in målet för andelen av fett på Icke-Protein-Energin (NPE)" alt="" />
+                                        </td>
+                                    </tr>
+
+                                    <tr id="EnergySupply">
+                                        <td class="leftheader">Energi</td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="SupplyAbs" value="0" readonly="readonly" size="5" />
+                                            &nbsp;kcal/d
+                                        </td>
+                                        <td align="left">
+                                            <input type="text" class="resultfield" name="SupplyRel" value="0" readonly="readonly" size="5" />
+                                            &nbsp;kcal/kg&times;d
+                                        </td>
+                                        <td>
+                                            <select name="iEnergy" size="1" style="width:10em;" onchange="yanuca();">
+                                                <option value="0">automatiskt</option>
+                                                <option value="1">10 kcal/kg (minimalt)</option>
+                                                <option value="2">15 kcal/kg (förminskat)</option>
+                                                <option value="3">20 kcal/kg (förminskat)</option>
+                                                <option value="4">25 kcal/kg (normalt)</option>
+                                                <option value="5">30 kcal/kg (normalt)</option>
+                                                <option value="6">35 kcal/kg (förhöjt)</option>
+                                                <option value="7">40 kcal/kg (förhöjt)</option>
+                                                <option value="8">45 kcal/kg (maximalt)</option>
+                                            </select>
+                                            <img align="top" class="tips" src="../images/ttip.png" title="|Ställ in målet för daglig energitillförsel (per kg kroppsvikt)" alt="" />
+                                        </td>
+                                    </tr>
+
+                                    <tr id="ReqTabBottom">
+                                        <td colspan="4">&nbsp;</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div> <!-- RequirementsTable end -->
+
+                        <!-- ==================== Rates Table ======================= -->
+                        <div id="RatesTable">
+
+                            <table class="formarea" summary="Supply Rates Table" cellspacing="0">
+
+                                <thead>
+                                    <tr>
+                                        <td class="nfheader" id="RatTabHead" colspan="7">
+                                          Tillförselschema
+                                        </td>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr id="Levels">
+                                        <td class="leftheader">Steg</td>
+                                        <td>TPN</td>
+                                        <td>1</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>4</td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr id="EnteralRates">
+                                        <td class="leftheader">Sondnäring</td>
+                                        <td>
+                                            <!--
+                                            <input type="text" class="resultfield" name="Level0Rate" value="0" readonly="readonly" size="5" />
+                                            -->
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level1Rate" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level2Rate" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level3Rate" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level4Rate" value="0" readonly="readonly" size="5"  />
+                                        </td>
+                                        <td>ml/h</td>
+                                    </tr>
+
+                                    <tr id="WaterQuota">
+                                        <td class="leftheader">Vattenmängd</td>
+                                        <td>
+                                            <!--
+                                            <input type="text" class="resultfield" name="Level0WaterQuota" value="0" readonly="readonly" size="5" />
+                                            -->
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level1WaterQuota" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level2WaterQuota" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level3WaterQuota" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level4WaterQuota" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>ml/h</td>
+                                    </tr>
+
+                                    <tr id="Portions">
+                                        <td class="leftheader">Portioner per dygn</td>
+                                        <td>
+                                            <!--
+                                            <input type="text" class="resultfield" name="Level0Portions" value="5" readonly="readonly" size="5" />
+                                            -->
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level1Portions" value="4" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level2Portions" value="4" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level3Portions" value="4" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level4Portions" value="4" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>&times; 4h</td>
+                                    </tr>
+
+
+                                    <tr id="RatesA10">
+                                        <td class="leftheader">Aminosyror 10%</td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level0A10" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level1A10" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level2A10" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level3A10" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level4A10" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>ml/h</td>
+                                    </tr>
+
+                                    <tr id="RatesG40">
+                                        <td class="leftheader">Glycos 40%</td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level0G40" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level1G40" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level2G40" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level3G40" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level4G40" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>ml/h</td>
+                                    </tr>
+
+                                    <tr id="RatesL20">
+                                        <td class="leftheader">Lipid 20%</td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level0L20" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level1L20" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level2L20" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level3L20" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>
+                                            <input type="text" class="resultfield" name="Level4L20" value="0" readonly="readonly" size="5" />
+                                        </td>
+                                        <td>ml/h</td>
+                                    </tr>
+
+                                    <tr id="RatTabBottom">
+                                        <td colspan="4">&nbsp;</td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div> <!-- RatesTable end -->
+
+                        <!-- ======================================================== -->
+
+                    </form> <!-- Nutriform end -->
+
+                </div> <!-- Main end -->
+
+                <!-- ************************** Footer ************************************** -->
+
+                <div id="Footer">
+
+                    <table id="DocInfo" summary="Copyright and License Information" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <td id="Copyright">
+                                    <b>YaNuCa 1.2.1</b>
+                                    &copy; 2003-2011 Dominic König
+                                </td>
+                                <td rowspan="2">
+                                    <img src="../images/agplv3.png" alt="" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="License">
+                                    This is free software and comes with ABSOLUTELY NO WARRANTY;<br />
+                                    you are welcome to redistribute and/or modify it under the terms of<br />
+                                    the <a target="_blank" href="../agpl.txt">GNU Affero General Public License</a>.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div> <!-- Footer end -->
+
+                <!-- ************************************************************************ -->
+
+            </div> <!-- Page end -->
+        </div> <!-- center end -->
+    </body>
+</html>

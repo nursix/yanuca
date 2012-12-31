@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+
+<!-- This document is part of the YaNuCa
+     nutrition calculation program for intensive care.
+
+     YaNuCa (Yet Another NUtrition CAlculator) Version 1.2
+
+     (c) 2003-2009 Dominic König (nursix.org)
+
+     The YaNuCa program, including this document, is free software;
+     you can redistribute it and/or modify it under the terms of the GNU
+     Affero General Public License as published by the Free Software Foundation;
+     either version 3 of the License, or (at your option) any later version.
+
+     The YaNuCa program is distributed in the hope that it will be useful, but
+     WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+     or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero Public License
+     for more details.
+
+     You should have received a copy of the GNU Affero Public License
+     along with this document; if not, see <http://www.gnu.org/licenses/>.
+
+     If you want to find out more about YaNuCa visit <http://www.nursix.org>
+-->
+
+  <head>
+    <title>Howto: YaNuCa</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <style type="text/css">
+        body {
+        }
+        #Page {
+            width: 66%;
+            text-align: left;
+            margin-left: 25px;
+        }
+        p, ul {
+            margin-left: 30px;
+            font-family: serif;
+        }
+        h1 {
+            padding: 6px;
+            color: #10427c;
+            background-color: #f0f0f0;
+        }
+        h2 {
+            border-top: solid 1px #000000;
+            border-left: solid 1px #000000;
+            padding: 10px;
+            color: #10427c;
+            background-color: #f0f0f0;
+        }
+        h3 {
+            margin: 0;
+            margin-left: 20px;
+            padding: 5px;
+            border-bottom: solid 1px #10427c;
+            color: #10427c;
+        }
+    </style>
+
+  </head>
+
+  <body>
+    <div id="Page">
+      <h1>YaNuCa</h1>
+
+      <p>
+        YaNuCa
+        ist ein Web-Tool zur Berechnung von künstlicher Ernährung für
+        erwachsene Intensivpatienten.
+      </p>
+
+      <p>
+        YaNuCa wurde ursprünglich herausgegeben von
+        <a target="_blank" href="http://www.nursix.org?page_id=6">nursix.org</a>.
+      </p>
+
+      <p>
+        Aktuelle Online-Version (zur direkten Benutzung via Web):
+      </p>
+      <ul>
+        <li>
+          <a target="_blank" href="index.html">YaNuCa 1.2</a>
+        </li>
+      </ul>
+
+      <p>
+        YaNuCa ist freie Software. Sie dürfen es kopieren und/oder
+        modifizieren zu den Bedingungen der <a target="_blank" href="../agpl.txt">GNU Affero General Public License</a>.
+      </p>
+
+      <p>
+        Mehr Informationen zu YaNuCa finden Sie im <a href="http://wiki.nursix.org/doku.php?id=yanuca:home" target="_blank">YaNuCa Wiki</a>.
+      </p>
+
+      <h2>Das YaNuCa-"Ernährungsmodell"</h2>
+
+      <p>
+        YaNuCa bietet kein formales Modell für die künstliche Ernährung von Intensivpatienten,
+        sondern ist einfach nur eine Rechenhilfe. Dennoch unterstützt YaNuCa eine bestimmte
+        Methode für den enteralen Ernährungsaufbau, die hier kurz beschrieben ist.
+      </p>
+
+      <h3>Allgemein</h3>
+
+      <p>
+        YaNuCa berechnet einen Ernährungsplan in 5 Stufen - eine Stufe ist für totale parenterale
+        Ernährung (TPN) und vier Stufen (1-4) für den Aufbau einer enteralen (Sonden-)ernährung.
+      </p>
+
+      <p>
+        Um die enterale Ernährung aufzubauen, startet man normalerweise mit Stufe 1 und geht
+        pro Tag um eine Stufe höher.
+      </p>
+
+      <p>
+        Für jede Stufe zeigt YaNuCa Zufuhrraten für enterale und parenterale Ernährungslösungen.
+        Das entsprechende Produkt zur Sondenernährung kann aus der eingebauten Datenbank ausgewählt
+        werden, während die parenterale Ernährung immer zusammengestellt wird aus 10%iger
+        Aminosäure-Lösung, 40%iger Glucose-Lösung und 20%iger Lipidemulsion (hierbei werden
+        jedoch keine bestimmten Produkte benannt oder empfohlen).
+      </p>
+
+      <h3>Enterale Ernährung</h3>
+
+      <p>
+        Es wird angenommen, dass die enterale Ernährung über eine gastrale Sonde in Intervallen
+        von je 4 Stunden mit der angegebenen Rate verabreicht wird, jeweils gefolgt von einer
+        Pause, die zur Toleranzprüfung und enteralen Medikation vorgesehen ist.
+      </p>
+
+      <p>
+        Entsprechend der Anzahl von 4-Stunden-Zyklen pro 24 Stunden, die notwendig sind um die
+        berechnete tägliche Menge von enteraler Nahrung zuzuführen, dauern die Pausen entweder
+        1 oder 2 Stunden (4 Zyklen/Tag=2 Stunden Pause, 5 Zyklen/Tag=1 Stunde Pause). Die erforderliche
+        Zyklenzahl wird in der Zufuhrraten-Tabelle angezeigt.
+      </p>
+
+      <h3>Maximale Rate für enterale Ernährung</h3>
+
+      <p>
+        YaNuCa läßt eine maximale enterale Zufuhrrate von 150 ml/h zu, was für die meisten
+        marktüblichen Produkte zu empfehlen ist. Man kann jedoch auch eine niedrigere
+        Maximalrate auswählen, falls erforderlich.
+      </p>
+
+      <h3>Passageprobleme bei enteraler Ernährung</h3>
+
+      <p>
+        Falls der Patient Passageprobleme bei der enteralen Ernährung zeigt, kann man
+        erwägen, einen 4-Stunden-Zyklus auszusetzen, um die Ursache zu klären. Falls das
+        Problem nicht behoben werden kann oder trotz geeigneter Gegenmaßnahmen weiterbesteht,
+        ist ein Aussetzen der gesamten enteralen Ernährung für den Rest des Tages zu
+        empfehlen - somit ein Umsetzen auf TPN. In manchen Fällen kann eine niedrigere
+        maximale Zufuhrrate helfen.
+      </p>
+
+      <p>
+        ACHTUNG: im schlimmsten Fall (unglücklicherweise oft) zeigen persistierende schwere
+        Passagestörungen eine enterale Ischämie an, bei der sich eine Fortsetzung der
+        enteralen Ernährung verbietet (erhöhtes Risiko für septische Komplikationen).
+      </p>
+
+      <h3>Wasserbilanz</h3>
+
+      <p>
+        Um die Berechnung der Wasserbilanz zu erleichtern wird der stündliche Wasseranteil in
+        der enteralen Ernährung in der Zufuhrraten-Tabelle angezeigt (für parenterale Lösungen
+        wird üblicherweise die Gesamtrate in die Bilanz gerechnet). Falls Sie lieber die
+        volle enterale Zufuhr in die Wasserbilanz einrechnen möchten, ignorieren Sie einfach
+        diese Zeile.
+      </p>
+
+      <h3>Parenterale Ernährung</h3>
+
+      <p>
+        Bei der parenteralen Ernährung wird angenommen, dass die Lösungen kontinuierlich über 24
+        Stunden verabreicht werden. Die parenteralen Zufuhrraten sind so berechnet, dass sie die
+        jeweilige enterale Ernährung bis auf den vollen Bedarf des Patienten ergänzen. Es steht
+        Ihnen frei, die parenterale Ergänzung zu applizieren oder nicht, dies ist jedoch zu
+        empfehlen für Patienten mit hohem Risiko für eine kritische Mangelernährung.
+      </p>
+
+      <p>
+        In Stufe 4 der enteralen Ernährung versucht YaNuCa, den berechneten Bedarf allein durch
+        enterale Ernährung zu decken. Das kann jedoch u.U. entweder an der festgelegten
+        Maximalrate für enterale Ernährung (150 ml/h oder weniger, falls eingestellt) oder an
+        einer ungeeigneten Kombination von Makronährstoffen in der gewählten Sondennahrung
+        scheitern (z.B. haben die meisten Produkte einen unzureichenden Proteinanteil). In
+        diesen Fällen wird auch in Stufe 4 eine parenterale Ergänzung angegeben. In anabolen
+        Krankheitsphasen oder wenn die künstliche Ernährung für mehr als 5 Tage erforderlich
+        ist, sollten diese Ergänzung in jedem Fall appliziert werden - insbesondere
+        Aminosäuren.
+      </p>
+
+      <h2>YaNuCa benutzen</h2>
+
+      <h3>Überblick</h3>
+
+      <p>
+        Die YaNuCa-Bedienoberfläche ist in vier Abschnitte unterteilt, die von oben nach
+        unten abgearbeitet werden sollten.
+      </p>
+
+      <p>
+        Der oberste (graue) Abschnitt dienst zur Angabe der Patientendaten.
+      </p>
+
+      <p>
+        Im mittleren (roten) Abschnitt können Sondennahrung und maximale enterale Zufuhrrate
+        ausgewählt sowie eine eventuelle orale Nahrungsaufnahme des Patienten angegeben werden.
+      </p>
+
+      <p>
+        Der mittlere (gelbe) Abschnitt zeigt den errechneten Bedarf und eine
+        mögliche Zusammensetzung der Nahrung aus den Makronährstoffen an. In
+        diesem Abschnitt kann man (rechts) manuell Zielbereiche für diese
+        Berechnung festlegen. Werden diese Einstellungen auf "automatisch"
+        belassen, rechnet YaNuCa mit den eingebauten Standardwerten.
+      </p>
+
+      <p>
+        Der untere (graue und blaue) Abschnitt zeigt die errechneten Zufuhrraten für
+        jede Stufe an.
+      </p>
+
+      <p>
+        Das gesamte Dokument kann einfach auf ein A4-Blatt ausgedruckt werden. Benutzen Sie
+        dazu einfach den "Drucken"-Button ihres Web-Browsers.
+      </p>
+
+      <h3>Patientendaten</h3>
+
+      <p>
+        Diese Felder erklären sich sehr gut selbst.
+      </p>
+
+      <p>
+        Falls das initiale Gewicht des Patienten unbekannt ist oder nicht genau bestimmt
+        werden kann, kann das Feld einfach auf "unbekannt" belassen werden. YaNuCa rechnet
+        dann mit einem Standardgewicht auf der Basis der übrigen angegeben Daten (das
+        tatsächlich verwendete Gewicht wird im gelben Abschnitt angezeigt). Fall jedoch
+        ein Gewicht ausgewählt wird, wird das "Statur"-Feld entsprechend ignoriert.
+      </p>
+
+      <p>
+        Die Zuordnung eines Krankheitsfaktors kann schwierig sein. Mehr noch, Stressfaktoren
+        sind dynamisch - sie können für denselben Patienten von Tag zu Tag schwanken. Deshalb
+        sollte der Ernährungsplan täglich neu berechnet werden. Der Krankheitsfaktor und der
+        Temperaturfaktor darunter skalieren den Bedarf zwischen 70 und 200% des geschätzten
+        Ruheenergieumsatzes des Patienten.
+      </p>
+
+      <h3>Sondennahrung und orale Nahrungsaufnahme</h3>
+
+      <p>
+        Im mittleren (roten) Abschnitt kann man die jeweilige Sondennahrung auswählen.
+      </p>
+
+      <p>
+        Die jeweilige Zusammensetzung der Sondennahrung dient YaNuCa als Leitlinie bei
+        der Berechnung der Nahrungszusammensetzung - auch für die parenterale Ernährung,
+        d.h. wenn sie eine glucosearme Sondennahrung wählen, wird auch der berechnete
+        Glucoseanteil in der parenteralen Ernährung niedriger sein.
+      </p>
+
+      <p>
+        Welche Sondennahrung sie wählen sollten, hängt von der Verfügbarkeit des Produktes
+        sowie von der individuellen Verträglichkeit und dem Bedarf des Patienten ab. Deshalb
+        stellt die voreingestellte Auswahl keineswegs eine Produktempfehlung dar.
+      </p>
+
+      <p>
+        Falls der Patient normal essen kann (eine nennenswerte Menge), dann kann YaNuCa dies
+        bei der Berechnung berücksichtigen. Um diese Funktion zu nutzen, schätzen Sie die
+        tägliche orale Nahrungsaufnahme (als Energiewert) und treffen eine entsprechende Auswahl
+        im "Orale Ernährung"-Feld.
+      </p>
+
+      <p>
+        Auf diese Weise können Sie auch eine supportive (ergänzende) parenterale Ernährung
+        berechnen, wenn der Patient zwar normal essen, aber seinen Bedarf damit nicht decken
+        kann. Verwenden Sie in diesem Fall die TPN-Berechnung.
+      </p>
+
+      <h3>Die Bedarfstabelle</h3>
+
+      <p>
+        Die Bedarfstabelle (gelb) zeigt den errechneten Bedarf des Patienten und eine
+        dafür geeignete Zusammenstellung aus Makronährstoffen an. Die Mengen der
+        jeweiligen Makronährstoffe sind angegeben als absolute (tägliche Gesamtmenge)
+        sowie relative Werte (tägliche Menge je kg Körpergewicht).
+      </p>
+
+      <p>
+        Die "Optionen"-Felder rechts gestatten eine manuelle Beeinflussung der
+        Nährstoffzusammenstellung. Diese Beeinflussung ist jedoch begrenzt durch
+        eingebaute Grenzwerte und die überhaupt vorhandenen Möglichkeiten. Sie
+        stellen insofern eher Richtwerte als präzise Vorgaben dar. Es kann durchaus
+        vorkommen, dass die hier getroffene Auswahl keinen signifikanten Effekt hat - vor
+        allem in Fällen, in denen ohnehin an den Grenzen des Machbaren therapiert wird.
+      </p>
+
+    </div>
+  </body>
+</html>

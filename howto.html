@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+
+<!-- This document is part of the YaNuCa
+     nutrition calculation program for intensive care.
+
+     YaNuCa (Yet Another NUtrition CAlculator) Version 1.2
+
+     (c) 2003-2009 Dominic König (nursix.org)
+
+     The YaNuCa program, including this document, is free software;
+     you can redistribute it and/or modify it under the terms of the GNU
+     Affero General Public License as published by the Free Software Foundation;
+     either version 3 of the License, or (at your option) any later version.
+
+     The YaNuCa program is distributed in the hope that it will be useful, but
+     WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+     or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero Public License
+     for more details.
+
+     You should have received a copy of the GNU Affero Public License
+     along with this document; if not, see <http://www.gnu.org/licenses/>.
+
+     If you want to find out more about YaNuCa visit <http://www.nursix.org>
+-->
+
+  <head>
+    <title>Howto: YaNuCa</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+        body {
+        }
+        #Page {
+            width: 66%;
+            text-align: left;
+            margin-left: 25px;
+        }
+        p, ul {
+            margin-left: 30px;
+            font-family: serif;
+        }
+        h1 {
+            padding: 6px;
+            color: #10427c;
+            background-color: #f0f0f0;
+        }
+        h2 {
+            border-top: solid 1px #000000;
+            border-left: solid 1px #000000;
+            padding: 10px;
+            color: #10427c;
+            background-color: #f0f0f0;
+        }
+        h3 {
+            margin: 0;
+            margin-left: 20px;
+            padding: 5px;
+            border-bottom: solid 1px #10427c;
+            color: #10427c;
+        }
+    </style>
+
+  </head>
+
+  <body>
+    <div id="Page">
+      <h1>YaNuCa</h1>
+
+      <p>
+        YaNuCa
+        is a web-tool to support the calculation of
+        artificial nutrition for intensive care patients.
+      </p>
+
+      <p>
+        YaNuCa was originally released by
+        <a target="_blank" href="http://www.nursix.org">nursix.org</a>.
+      </p>
+
+      <p>
+        Current online version (for use directly from the WWW):
+      </p>
+      <ul>
+        <li>
+          <a target="_blank" href="index.html">YaNuCa 1.2</a>
+        </li>
+      </ul>
+
+      <p>
+        YaNuCa is free software. You are welcome to redistribute
+        and/or modify it under the terms of the
+        <a target="_blank" href="./agpl.txt">GNU Affero General Public License</a>.
+      </p>
+
+      <p>
+        More information about YaNuCa can be found on <a href="http://wiki.nursix.org/doku.php?id=yanuca:home" target="_blank">YaNuCa Wiki</a>.
+      </p>
+
+      <h2>The YaNuCa "Nutrition Model"</h2>
+
+      <p>
+        YaNuCa does not provide a formal model for artificial nutrition of ICU patients, but
+        is simply a calculation tool. However, YaNuCa supports a certain method of building
+        up enteral nutrition, which shall be described here in short.
+      </p>
+
+      <h3>General</h3>
+
+      <p>
+        YaNuCa calculates a nutrition plan on 5 levels - one level is for total parenteral
+        nutrition (TPN) and four levels (1-4) for building up an enteral (tube-)nutrition.
+      </p>
+
+      <p>
+        To build up the enteral nutrition you usually start with level 1 and then step up one
+        level per day.
+      </p>
+
+      <p>
+        For each level YaNuCa shows supply rates for enteral and parenteral nutrition solutions.
+        The particular product for tube feeding can be chosen from the built-in database, while
+        the parenteral nutrition is always assembled of 10% amino acid, 40% glucose and 20% lipid
+        emulsion (however, no particular products named or recommended here).
+      </p>
+
+      <h3>Enteral Nutrition</h3>
+
+      <p>
+        Enteral nutrition is assumed to be supplied over a gastric tube in intervals of 4 hours
+        on the given rate, each followed by a pause intended for tolerance checks and enteral
+        medication.
+      </p>
+
+      <p>
+        Depending on how many of these 4-hour-cycles per 24 hours are neccessary to supply the
+        calculated daily amount of enteral nutrients, the pause intervals may last for 1 or 2
+        hours (4 cycles/d=2h pause, 5 cycles/d=1h pause). The neccessary number of cycles per
+        day is shown on the supply rates table.
+      </p>
+
+      <h3>Maximum Rate of Enteral Nutrition</h3>
+
+      <p>
+        YaNuCa allows a maximum enteral supply rate of only 150 ml/h, which is recommendable for
+        the most products on the market. However, you may choose a lower maximum rate as necessary.
+      </p>
+
+      <h3>Passage Problems in Enteral Nutrition</h3>
+
+      <p>
+        If the patient shows passage problems in the enteral nutrition, you may consider
+        to suspend one 4-hour-cycle, while clearing the cause. If the problem cannot be
+        solved or persists despite appropriate counter measures, it is recommendable to
+        suspend the whole enteral nutrition for the rest of the day - thus stepping down
+        to TPN. In some cases, a lower maximum supply rate might help.
+      </p>
+
+      <p>
+        NOTE: in worst case (unluckily often) persistent severe passage problems indicate
+        an enteral ischaemia, which may prohibit further enteral nutrition (increased risk
+        for septic complications).
+      </p>
+
+      <h3>Water Balance</h3>
+
+      <p>
+        To support water balance calculation, the hourly water partition of the enteral nutrition
+        is shown in the supply rates table (for parenteral solutions usually the full rate is used
+        for the water balance). If you rather calculate the full volume of enteral nutrition for
+        water balance, just ignore this line.
+      </p>
+
+      <h3>Parenteral Nutrition</h3>
+
+      <p>
+        For parenteral nutrition it is assumed that you supply the solutions continously 24 hours
+        per day. The parenteral supply rates are calculated to complement the enteral nutrition to
+        the full nutrition requirements of the patient. It is at your option whether to apply these
+        parenteral complements or not, however, it is recommended to add them in patients with high
+        risk for critical malnutrition.
+      </p>
+
+      <p>
+        At level 4 of enteral nutrition, YaNuCa tries to fulfill the calculated requirements
+        solely from enteral nutrition. However, this may fail due to either the maximum supply
+        rate for enteral nutrition (which is 150 ml/h or less if you set it) or due to unsuitable
+        composition of macronutrients in the chosen formula (e.g., most products lack a
+        sufficient protein quota). In these cases you will get parenteral complements calculated
+        even at level 4. In anabolic phase, or if artificial nutrition applied longer than 5 days,
+        is recommendable to supply these complements in any case, especially Amino Acids.
+      </p>
+
+      <h2>How to use YaNuCa</h2>
+
+      <h3>Overview</h3>
+
+      <p>
+        The YaNuCa front end is structured into four sections which shall
+        be handled from top to bottom.
+      </p>
+
+      <p>
+        The upper (grey) section is used to declare the patient data.
+      </p>
+
+      <p>
+        In the middle (red) section you can choose the enteral formula, set a maximum enteral
+        supply rate and declare possible oral intake of the patient.
+      </p>
+
+      <p>
+        The middle (yellow) section shows the calculated requirements and a
+        desirable composition of macro nutrients. Within this section (on the right)
+        you may choose ranges and set goals for this calculation manually. If you
+        leave them on automatic, YaNuCa calculates them from built-in defaults.
+      </p>
+
+      <p>
+        The bottom (grey and blue) section shows the calculated supply rates for
+        each level.
+      </p>
+
+      <p>
+        The whole document can simply be printed on one A4 sheet. Just press the "Print"-button
+        of your browser.
+      </p>
+
+      <h3>Patient Data</h3>
+
+      <p>
+        These input fields explain themselves very well.
+      </p>
+
+      <p>
+        If the initial weight of the patient is unknown or cannot be measured properly, you can
+        leave this field on "unkown". YaNuCa will then calculate a standard weight based on
+        the other data you provided (the actually used weight is shown in the yellow section).
+        If you choose a particular weight, the "Shape"-field will be ignored instead.
+      </p>
+
+      <p>
+        The assignment of an illness stress factor might be difficult. Moreover, stress factors
+        are dynamic - they might vary for the same patient from day to day, therefore you should
+        re-calculate the nutrition plan daily. The illness stress factor and the thermal stress
+        factor below scale the requirements from 70 up to 200% of the estimated basal metabolic
+        rate.
+      </p>
+
+      <h3>Enteral Formula and Oral Intake</h3>
+
+      <p>
+        In the middle (red) section you can choose a particular enteral formula.
+      </p>
+
+      <p>
+        The nutrient composition of the selected formula will guide YaNuCa in the
+        calculation of the desired nutrient composition even for parenteral nutrition, i.e.
+        if you choose a low-glucose formula, the calculated parenteral glucose supply
+        rates will be lower as well.
+      </p>
+
+      <p>
+        Which product you should choose depends on the availability of this product as well
+        as on the individual compatibility and needs of the patient. Therefore, the pre-selected
+        product does not represent any recommendation at all.
+      </p>
+
+      <p>
+        If the patient can eat normally (an amount worth mentioning) then YaNuCa can include
+        this into the calculation. To use this function, you just have to estimate the amount
+        of orally assimilated food (in terms of energy) and make the appropriate selection in
+        the "Oral Nutrition"-field.
+      </p>
+
+      <p>
+        That way you may also calculate a supportive (additional) parenteral nutrition, if the
+        patient can eat normally but does not meet his requirements with it.
+      </p>
+
+      <h3>The Requirements Table</h3>
+
+      <p>
+        The requirements table shows the calculated requirements for the patient, and a
+        desirable composition of macro nutrients that would fulfill these. The amounts of
+        the particular macro nutrients and total energy supply are detailed as absolute
+        (total daily amount) and relative (daily amount related to the patient weight)
+        values.
+      </p>
+
+      <p>
+        The "Options" fields on the right enable you to manually influence the nutrient
+        composition calculation. Your influence is limited to built-in supply limits
+        as well as overall possibilities, hence you may set goals rather than precepts.
+        So, sometimes your choices here might have no significant effect - mostly in
+        cases where you operate at the outer edge of possibilities, anyway.
+      </p>
+
+    </div>
+  </body>
+</html>

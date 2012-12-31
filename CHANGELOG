@@ -1,0 +1,27 @@
+- added Diben
+
+Changed in 1.2 (stable):
+
+- complete rewrite of the core library
+- introduction of jQuery and clueTip
+- new feature: goal setting for lipid supply
+- removed correction factor from requirements estimation
+- slightly reworked user interface
+- updated HowTo document
+- removed enteral rates in TPN
+
+Changed in 1.1 (unstable):
+
+- Language-independent parts separated
+- Front language is now english
+- CHANGELOG added
+- "disabled"-modifier replaced by "readonly"
+- project moved to savannah, links updated
+- sourcecode stored in savannah CVS, links updated
+
+Changed in 1.0 (stable):
+
+- Project adopted from ainurse.org
+- Version number switched from 0.4 to 1.0
+- License changed to GNU/AGPL
+- show AGPL-Icon in footer
