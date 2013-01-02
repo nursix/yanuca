@@ -1,4 +1,11 @@
-- added Diben
+Changed in 1.3.1:
+
+- changed license from AGPL to MIT
+- fixed broken formula for stress factor escalation
+- added jsRender (for future use)
+- updated jQuery to 1.8.3
+- moved project to GitHub
+- added Diben (OSH/Sweden requirement)
 
 Changed in 1.2 (stable):
 
