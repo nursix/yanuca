@@ -195,6 +195,16 @@ function Patient() {
 //
 Patient.prototype.update = function(sex, age, size, bmi, weight, fever, illness) {
 
+    // minima/maxima
+
+    var rBMRmin = 15; // minimum relative basal metabolic rate in kcal/kg*d
+    var rBMRmax = 40; // maximum relative basal metabolic rate in kcal/kg*d
+
+    var feverMin = 0.5;
+    var feverMax = 1.4;
+    var illnessMin = 0.5;
+    var illnessMax = 1.4;
+
     // update base values
 
     this.sex = sex;
@@ -203,33 +213,17 @@ Patient.prototype.update = function(sex, age, size, bmi, weight, fever, illness)
     this.bmi = bmi;
     this.weight = weight;
     this.fever = fever;
+
     this.illness = YA_ILLNESS_FACTOR[illness];
-    if ( this.illness == undefined ) {
+    if ( this.illness === undefined ) {
         this.illness = 1.0;
     }
 
     // correct stress factors - do we really need to do this?
-    if (this.illness < 0.5) {
-        this.illness = 0.5;
-    }
-    else if ( this.illness > 1.4 ) {
-        this.illness = 1.4;
-    }
+    this.illness = Math.max(Math.min(this.illness, illnessMax), illnessMin);
+    this.fever = Math.max(Math.min(this.fever, feverMax), feverMin);
 
-    if (this.fever < 0.5) {
-        this.fever = 0.5;
-    }
-    else if ( this.fever > 1.4 ) {
-        this.fever = 1.4;
-    }
-
-    // reset metabolic rates
-
-    this.bmr = 0;
-    this.emr = 0;
-
-    // check/calculate weight
-
+    // Check/calculate weight
     if (this.weight < 30) {
         if (this.weight != 0) {
             this.weight = 30;
@@ -242,37 +236,33 @@ Patient.prototype.update = function(sex, age, size, bmi, weight, fever, illness)
         this.weight = 250;
     }
 
-    // calculate basal metabolic rate (after Harris and Benedict)
-
+    // Calculate basal metabolic rate (after Harris and Benedict)
+    this.bmr = 0;
     if (this.sex == "0") {
         this.bmr = 655.0 + 9.6 * this.weight + 1.8 * this.size - 4.7 * this.age;
     } else {
         this.bmr = 66.5 + 13.8 * this.weight + 5.0 * this.size - 6.8 * this.age;
     }
 
-    // calculate real metabolic rate (for stress factors)
+    // Calculate effective metabolic rate (for stress factors)
 
-    var rBMRmin = 15; // minimum relative basal metabolic rate in kcal/kg*d
-    var rBMRmax = 40; // maximum relative basal metabolic rate in kcal/kg*d
-    var rEMRmax = 47; // maximum relative metabolic rate in kcal/kg*d
+    var rBMR = this.bmr / this.weight; // relative basal metabolic rate
 
-    this.emr = this.bmr;
-    var rBMR = this.emr / this.weight;
+    // Maximum Stress Factor
+    var sMax = feverMax * illnessMax;
 
-    if (rBMR > rBMRmax) {
-        this.emr = this.weight*rBMRmax;
-        rBMR = rBMRmax;
-    }
+    // Maximum Relative Effective Metabolic Rate in kcal/kg*d
+    var rEMRmax = Math.min(47, rBMR * sMax);
 
-    if (rBMR < rBMRmin) {
-        this.emr = this.weight*rBMRmin;
-        rBMR = rBMRmin;
-    }
+    // Relative Basal Metabolic Rate
+    var rBMR = Math.max(Math.min(this.bmr / this.weight, rBMRmax), rBMRmin);
 
-    var factor = (rEMRmax - rBMR)/(rBMR);
-    var stress = 1.0 + factor * (this.illness * this.fever - 1.0);
+    // Stress factors
+    var s = this.illness * this.fever;
+    var a = ((rEMRmax)-sMax*rBMR)/((-1)*(-sMax)*(sMax-1));
+    var b = ((rEMRmax)-sMax*sMax*rBMR)/(sMax*(1-sMax));
 
-    this.emr = this.emr * stress;
+    this.emr = (a * s * s + b * s) * this.weight;
 }
 
 // ****************************************************************************
